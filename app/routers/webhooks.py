@@ -4,7 +4,7 @@ import json
 from fastapi import APIRouter, Request, HTTPException, status, Depends
 from sqlalchemy.orm import Session
 from app.database import get_db
-from app import models
+from app import models  # 👈 Importação correta
 from app.config import settings
 
 router = APIRouter(tags=["webhooks"])
