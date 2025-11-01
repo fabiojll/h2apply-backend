@@ -17,7 +17,7 @@ app = FastAPI(
 # Substitua pelo URL do seu frontend no Render
 origins = [
     "http://localhost:3000",  # para testes locais
-    "https://h2apply.onrender.com",  # 👈 ALTERE PARA SEU DOMÍNIO REAL NO RENDER
+     "https://h2apply-frontend.onrender.com",  # 👈 ALTERE PARA SEU DOMÍNIO REAL NO RENDER
 ]
 
 app.add_middleware(
