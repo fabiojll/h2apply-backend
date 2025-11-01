@@ -5,6 +5,7 @@ from app.routers import auth
 from app.routers import auth, jobs, applications
 from app.database import engine, Base, SessionLocal
 from app.config import settings
+from app.routers import auth, jobs, applications, subscriptions, webhooks
 
 # Cria as tabelas no banco (só na primeira execução)
 def init_db():
@@ -82,4 +83,9 @@ app.add_middleware(
 # Inclui as rotas
 app.include_router(auth.router)
 app.include_router(jobs.router) 
+app.include_router(applications.router)]
+app.include_router(auth.router)
+app.include_router(jobs.router)
 app.include_router(applications.router)
+app.include_router(subscriptions.router)
+app.include_router(webhooks.router)
