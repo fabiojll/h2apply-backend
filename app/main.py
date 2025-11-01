@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers import auth
+from app.routers import auth, jobs  # 👈 adicione "jobs" aqui
 from app.database import engine, Base
 from app.config import settings
 
@@ -30,3 +31,4 @@ app.add_middleware(
 
 # Inclui as rotas
 app.include_router(auth.router)
+app.include_router(jobs.router) 
