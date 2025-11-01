@@ -5,6 +5,7 @@ from app.database import get_db
 from app.dependencies import get_current_user
 from typing import List
 
+
 router = APIRouter(prefix="/applications", tags=["applications"])
 
 @router.post("/", response_model=schemas.ApplicationResponse)
