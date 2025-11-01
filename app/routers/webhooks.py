@@ -1,7 +1,7 @@
 import hashlib
 import hmac
 import json
-from fastapi import APIRouter, Request, HTTPException, status
+from fastapi import APIRouter, Request, HTTPException, status, Depends
 from sqlalchemy.orm import Session
 from app.database import get_db
 from app import models
