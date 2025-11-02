@@ -7,7 +7,11 @@ import os
 DATABASE_URL = "sqlite:///./sql_app.db"
 
 engine = create_engine(
-    DATABASE_URL, connect_args={"check_same_thread": False}
+    DATABASE_URL, 
+    connect_args={
+        "check_same_thread": False,
+        "timeout": 30  # ← Adiciona timeout para evitar travamentos
+    }
 )
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
