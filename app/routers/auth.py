@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from datetime import timedelta
@@ -52,3 +55,6 @@ def login(user: schemas.UserLogin, db: Session = Depends(get_db)):
         data={"user_id": db_user.id}, expires_delta=access_token_expires
     )
     return {"access_token": access_token, "token_type": "bearer"}
+     except Exception as e:
+        logger.error(f"Erro no signup: {str(e)}")
+        raise HTTPException(status_code=500, detail="Erro interno")
