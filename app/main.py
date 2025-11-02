@@ -66,14 +66,12 @@ app = FastAPI(
 )
 
 # Configuração de CORS
-origins = [
-    "http://localhost:3000",
-    "https://h2apply-frontend.onrender.com",
-]
+
+from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],  # ← Permite qualquer domínio (remova depois de testar!)
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
