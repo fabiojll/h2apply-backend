@@ -1,13 +1,12 @@
 from fastapi import FastAPI
 from datetime import date
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import auth
-from app.routers import auth, jobs, applications
 from app.database import engine, Base, SessionLocal
+from app import models
 from app.config import settings
 from app.routers import auth, jobs, applications, subscriptions
 
-# Cria as tabelas no banco (só na primeira execução)
+# Função para inicializar o banco com dados iniciais
 def init_db():
     Base.metadata.create_all(bind=engine)
     db = SessionLocal()
@@ -56,9 +55,10 @@ def init_db():
     finally:
         db.close()
 
-# Chama a inicialização
+# Inicializa o banco
 init_db()
 
+# Cria a aplicação FastAPI
 app = FastAPI(
     title="H2Apply API",
     description="Backend para o SaaS H2Apply - candidaturas H-2A/H-2B",
@@ -66,10 +66,9 @@ app = FastAPI(
 )
 
 # Configuração de CORS
-# Substitua pelo URL do seu frontend no Render
 origins = [
-    "http://localhost:3000",  # para testes locais
-     "https://h2apply-frontend.onrender.com",  # 👈 ALTERE PARA SEU DOMÍNIO REAL NO RENDER
+    "http://localhost:3000",
+    "https://h2apply-frontend.onrender.com",
 ]
 
 app.add_middleware(
@@ -80,11 +79,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Inclui as rotas
+# Inclui todas as rotas
 app.include_router(auth.router)
-app.include_router(jobs.router) 
+app.include_router(jobs.router)
 app.include_router(applications.router)
 app.include_router(subscriptions.router)
-
-
-
